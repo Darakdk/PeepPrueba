@@ -34,9 +34,9 @@ class ListAdapter(val cntx: Context, val userList: List<User>) : ArrayAdapter<Us
         val localFile = File.createTempFile("images"+user.uid, "jpg")
 
         pathReference.getFile(localFile).addOnSuccessListener {
-            /*val bitmap = BitmapFactory.decodeFile("images"+user.uid+"jpg")
+            val bitmap = BitmapFactory.decodeFile(localFile.toString())
             val imageView = row.userimageView as ImageView
-            imageView.setImageBitmap(BitmapFactory.decodeFile("images"+user.uid+"jpg"))*/
+            imageView.setImageBitmap(bitmap)
         }.addOnFailureListener {
             // Handle any errors
         }

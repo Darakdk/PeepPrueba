@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "144742611539",
+    "firebase_url": "https://pruebapeep.firebaseio.com",
+    "project_id": "pruebapeep",
+    "storage_bucket": "pruebapeep.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144742611539:android:962089d71d6878cbb9e4a6",
+        "android_client_info": {
+          "package_name": "com.testeando.pruebapeep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144742611539-mlts7b078j3le53s83mibm9v19r16f1i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.testeando.pruebapeep",
+            "certificate_hash": "25a725820a08a0e852b5ba095ddbc959eac6d8df"
+          }
+        },
+        {
+          "client_id": "144742611539-nene27l9e89ubdscpgc4r1co3dov7mmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJNT4PuAHqepLR8-_Kap-XHNJYYrmArhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "144742611539-nene27l9e89ubdscpgc4r1co3dov7mmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

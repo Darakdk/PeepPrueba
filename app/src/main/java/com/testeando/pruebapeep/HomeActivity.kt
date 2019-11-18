@@ -1,7 +1,6 @@
 package com.testeando.pruebapeep
 
-import android.Manifest
-import android.content.pm.PackageManager
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,19 +10,10 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_home.*
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.widget.ImageView
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.graphics.Bitmap
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.location.Location
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.storage.FirebaseStorage

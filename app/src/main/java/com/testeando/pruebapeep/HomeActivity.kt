@@ -31,7 +31,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     //Download Image from a link
-    private inner class DownloadImageTask(internal var bmImage: ImageView) :
+    private inner class DownloadImageTask() :
         AsyncTask<String, Void, Bitmap>() {
 
         override fun doInBackground(vararg urls: String): Bitmap? {
@@ -49,8 +49,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         override fun onPostExecute(result: Bitmap) {
-            bmImage.setImageBitmap(result)
-            uploadImage()
+            uploadImage(result)
         }
     }
 
@@ -91,8 +90,9 @@ class HomeActivity : AppCompatActivity() {
 
         })
         val imgLink=auth.currentUser?.photoUrl.toString()
-        DownloadImageTask(profImg)
-            .execute(imgLink);
+
+        DownloadImageTask()
+            .execute(imgLink)
 
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
@@ -113,13 +113,13 @@ class HomeActivity : AppCompatActivity() {
         finish()
     }
 
-    fun uploadImage()
+    fun uploadImage(bitMp: Bitmap)
     {
         val storageRef = storage.reference
-        var bitMp=profImg.drawable.toBitmap()
-        bitMp= Bitmap.createScaledBitmap(bitMp,400,400,false)
+        var bitMap=bitMp
+        bitMap= Bitmap.createScaledBitmap(bitMap,400,400,false)
         val outStream = ByteArrayOutputStream()
-        bitMp.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+        bitMap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
         val data = outStream.toByteArray()
 
         val profileImageRef = storageRef.child("UserPhotos").child(auth.currentUser?.uid!!).child("userImage.jpg")

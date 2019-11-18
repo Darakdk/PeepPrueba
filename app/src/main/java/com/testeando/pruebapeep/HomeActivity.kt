@@ -21,8 +21,11 @@ import android.graphics.Bitmap
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.location.Location
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
@@ -34,6 +37,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var listView: ListView
     private lateinit var auth: FirebaseAuth
     lateinit var storage: FirebaseStorage
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
 
     //Download Image from a link
@@ -69,8 +73,10 @@ class HomeActivity : AppCompatActivity() {
         userList = mutableListOf()
         listView = userListView
         storage = FirebaseStorage.getInstance()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         signOut.setOnClickListener{ signOut() }
+
 
         database.child("User").addValueEventListener(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -92,12 +98,20 @@ class HomeActivity : AppCompatActivity() {
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
                 // ...
             }
+
         })
         val imgLink=auth.currentUser?.photoUrl.toString()
         DownloadImageTask(profImg)
             .execute(imgLink);
 
-
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                // Got last known location. In some rare situations this can be null.
+                if(location!=null)
+                {
+                    writeUserLocation(auth.currentUser?.uid!!,location)
+                }
+            }
 
 
 
@@ -127,6 +141,12 @@ class HomeActivity : AppCompatActivity() {
             // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
             // ...
         }
+    }
+
+    //Write Location on database
+    private fun writeUserLocation(userId: String, location: Location) {
+        database.child("User").child(userId).child("Location").child("Latitude").setValue(location.latitude.toString())
+        database.child("User").child(userId).child("Location").child("Longitude").setValue(location.longitude.toString())
     }
 
 
